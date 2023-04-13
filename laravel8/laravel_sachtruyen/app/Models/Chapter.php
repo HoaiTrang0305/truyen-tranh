@@ -5,17 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Truyen extends Model
+class Chapter extends Model
 {
     use HasFactory;
     public $timestamps=false;
     protected $fillable=[
-        'tentruyen','tomtat','kichhoat','slug_truyen','hinhanh','danhmuc_id'
+        'truyen_id','tomtat','tieude','noidung','kichhoat','slug_chapter'
     ];
     protected $primaryKey='id';
-    protected $table='truyen';
+    protected $table='chapter';
 
-    public function danhmuctruyen(){
-        return $this->belongsTo('App\Models\DanhmucTruyen','danhmuc_id','id');
+    public function truyen(){
+        return $this->belongsTo('App\Models\Truyen');
     }
 }

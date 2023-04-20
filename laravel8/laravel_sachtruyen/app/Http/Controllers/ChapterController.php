@@ -5,8 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Chapter;
 use App\Models\Truyen;
-
-
 class ChapterController extends Controller
 {
     /**
@@ -16,10 +14,8 @@ class ChapterController extends Controller
      */
     public function index()
     {
-        $chapter=Chapter::with('truyen')->orderBy('id','DESC')->get();
-       
+        $chapter = Chapter::with('truyen')->orderBy('id','DESC')->get();
         return view('admincp.chapter.index')->with(compact('chapter'));
-        
     }
 
     /**
@@ -29,7 +25,7 @@ class ChapterController extends Controller
      */
     public function create()
     {
-        $truyen=Truyen::orderBy('id','DESC')->get();
+        $truyen = Truyen::orderBy('id','DESC')->get();
         return view('admincp.chapter.create')->with(compact('truyen'));
     }
 
@@ -41,37 +37,37 @@ class ChapterController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request -> validate(
-             [
-                 'tieude' => 'required|unique:chapter|max:255',
-                 'slug_chapter' => 'required|unique:chapter|max:255',
-                 'noidung' => 'required',  
-                 'tomtat' => 'required',
-                 'kichhoat' => 'required',
-                 'truyen_id' => 'required', 
-             ],
-             [
-                 'tieude.unique' => 'Tiêu đề đã tồn tại, vui lòng điền tiêu đề khác.',        
-                 'slug_chapter.unique' => 'Slug đã tồn tại, vui lòng điền slug khác.',
-                
-                 'tieude.required' => 'Phải có tiêu đề.',
-                 'slug_tieude.required' => 'Phải có slug chapter.',
-                 'tomtat.required' => 'Phải có tóm tắt chapter.',
-                 'noidung.required' => 'Phải có nội dung truyện.',
+        $data = $request->validate  (
+            [
+                'tieude'=>'required|unique:chapter|max:255',
+                'slug_chapter'=>'required|unique:chapter|max:255',
 
-             ]
+                'noidung'=>'required',
+                'tomtat'=>'required',
+                'kichhoat'=>'required',
+                'truyen_id'=>'required',
+            ],
+            [
+                'tieude.unique'=>'Tiêu đề chapter đã tồn tại, vui lòng điền tiêu đề khác',
+                'slug_chapter.unique'=>'Slug chapter đã tồn tại, vui lòng điền slug khác',
+                'slug_chapter.required'=>'Thiếu slug chapter, vui lòng nhập slug chapter',
+                'tieude.required'=>'Thiếu tiêu đề chapter, vui lòng nhập tiêu đề chapter',
+                'tomtat.required'=>'Thiếu tóm tắt chapter, vui lòng nhập tóm tắt chapter',
+                'noidung.required'=>'Thiếu nội dung chapter, vui lòng nhập nội dung chapter',
+            ]
          );
-        
-          $chapter=new Chapter();
-          $chapter->tieude = $data['tieude'];
-          $chapter->slug_chapter= $data['slug_chapter'];
-          $chapter->tomtat = $data['tomtat'];
-          $chapter->noidung = $data['noidung'];
-          $chapter->kichhoat = $data['kichhoat'];
-          $chapter->truyen_id = $data['truyen_id'];
-        
-          $chapter->save(); 
-          return redirect()->back()->with('status','Thêm chapter thành công');
+         
+         $chapter = new Chapter();
+
+         $chapter->tieude = $data['tieude'];
+         $chapter->slug_chapter = $data['slug_chapter'];
+         $chapter->tomtat = $data['tomtat'];
+         $chapter->noidung = $data['noidung'];
+         $chapter->kichhoat = $data['kichhoat'];
+         $chapter->truyen_id = $data['truyen_id'];
+    
+         $chapter->save();
+         return redirect()->back()->with('status','Thêm chapter thành công');
     }
 
     /**
@@ -93,8 +89,8 @@ class ChapterController extends Controller
      */
     public function edit($id)
     {
-        $chapter=Chapter::find($id);
-        $truyen=Truyen::orderBy('id','DESC')->get();
+        $chapter = Chapter::find($id);
+        $truyen = Truyen::orderBy('id','DESC')->get();
         return view('admincp.chapter.edit')->with(compact('truyen','chapter'));
     }
 
@@ -107,36 +103,36 @@ class ChapterController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $data = $request -> validate(
+        $data = $request->validate  (
             [
-                'tieude' => 'required|max:255',
-                'slug_chapter' => 'required|max:255',
-                'noidung' => 'required',  
-                'tomtat' => 'required',
-                'kichhoat' => 'required',
-                'truyen_id' => 'required', 
+                'tieude'=>'required|max:255',
+                'slug_chapter'=>'required|max:255',
+
+                'noidung'=>'required',
+                'tomtat'=>'required',
+                'kichhoat'=>'required',
+                'truyen_id'=>'required',
             ],
             [
-                'tieude.unique' => 'Tiêu đề đã tồn tại, vui lòng điền tiêu đề khác.',        
-                'slug_chapter.unique' => 'Slug đã tồn tại, vui lòng điền slug khác.',
-               
-                'tieude.required' => 'Phải có tiêu đề.',
-                'slug_tieude.required' => 'Phải có slug chapter.',
-                'tomtat.required' => 'Phải có tóm tắt chapter.',
-                'noidung.required' => 'Phải có nội dung truyện.',
-
+                'tieude.unique'=>'Tiêu đề chapter đã tồn tại, vui lòng điền tiêu đề khác',
+                'slug_chapter.unique'=>'Slug chapter đã tồn tại, vui lòng điền slug khác',
+                'slug_chapter.required'=>'Thiếu slug chapter, vui lòng nhập slug chapter',
+                'tieude.required'=>'Thiếu tiêu đề chapter, vui lòng nhập tiêu đề chapter',
+                'tomtat.required'=>'Thiếu tóm tắt chapter, vui lòng nhập tóm tắt chapter',
+                'noidung.required'=>'Thiếu nội dung chapter, vui lòng nhập nội dung chapter',
             ]
-        );
-       
-         $chapter= Chapter::find($id);
+         );
+         
+         $chapter = Chapter::find($id);
+
          $chapter->tieude = $data['tieude'];
-         $chapter->slug_chapter= $data['slug_chapter'];
+         $chapter->slug_chapter = $data['slug_chapter'];
          $chapter->tomtat = $data['tomtat'];
          $chapter->noidung = $data['noidung'];
          $chapter->kichhoat = $data['kichhoat'];
          $chapter->truyen_id = $data['truyen_id'];
-       
-         $chapter->save(); 
+    
+         $chapter->save();
          return redirect()->back()->with('status','Cập nhật chapter thành công');
     }
 
@@ -148,7 +144,6 @@ class ChapterController extends Controller
      */
     public function destroy($id)
     {
-        Chapter::find($id)->delete();
-        return redirect()->back()->with('status','Xóa chapter thành công');
+        //
     }
 }

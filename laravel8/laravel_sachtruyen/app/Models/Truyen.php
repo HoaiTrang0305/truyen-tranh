@@ -8,17 +8,21 @@ use Illuminate\Database\Eloquent\Model;
 class Truyen extends Model
 {
     use HasFactory;
-    public $timestamps=false;
-    protected $fillable=[
-        'tentruyen','tomtat','kichhoat','slug_truyen','hinhanh','danhmuc_id'
+    protected $dates =[
+        'created_at',
+        'updated_at',
     ];
-    protected $primaryKey='id';
-    protected $table='truyen';
+
+    public $timestamps = false;//set thoi gian false
+    protected $fillable =[
+        'tentruyen','tomtat','kichhoat','slug_truyen', 'hinhanh','danhmuc_id','created_at','updated_at','truyen_noibat'
+    ];
+    protected $primarykey ='id';
+    protected $table = 'truyen';
 
     public function danhmuctruyen(){
         return $this->belongsTo('App\Models\DanhmucTruyen','danhmuc_id','id');
     }
-
     public function chapter(){
         return $this->hasMany('App\Models\Chapter','truyen_id','id');
     }

@@ -1,190 +1,50 @@
- @extends ('../layout')
- @section('slide')
+@extends('../layout')
+@section('slide')
     @include('pages.slide')
-@endsection
-
- @section('content')
- <!-------Sách mới cập nhật-------->
- <div class="album py-5 bg-light">
-            <h3>Sách mới cập nhật</h3>           
-                <div class="container">
-                    <div class="row">
-                        @foreach ($truyen as $key => $value)
-                        <div class="col-md-3">
-                            <div class="card mb-3 box-shadow">                                
-                                    <img class="card-img-top" src="{{asset('public/uploads/truyen/'.$value->hinhanh)}}" >
+@endsection  
+@section('content')       
+<h3>SÁCH MỚI NHẤT</3>
+                <div class="owl-carousel owl-theme">
+                @foreach($truyen as $key =>$value)
+                    <div class="item">
+                        <img src="{{asset('public/uploads/truyen/'.$value->hinhanh)}}"/>
+                        <h3>{{$value->tentruyen}}</h3>
+                        <p><i class="fas fa-eye"></i>19999</p>
+                        <a class="btn btn-danger btn-sm" href="{{url('xem-truyen/'.$value->slug_truyen)}}" >Đọc ngay</a>
+                    </div>
+                    @endforeach
+                </div>
+                <!------------------------ Sách mới ----------------------------->
+                <h3>SÁCH MỚI CẬP NHẬT</h3>
+                <div class="album py-5 bg-body-tertiary">
+                        <div class="container">
+                            
+                        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-3">
+                            @foreach($truyen as $key =>$value)
+                            <div class="col">
+                            <div class="card shadow-sm">
+                               
+                                    <img class="card-img-top" src="{{asset('public/uploads/truyen/'.$value->hinhanh)}}" />
                                     <div class="card-body">
                                         <h5>{{$value->tentruyen}}</h5>
-                                        <p class="card-text">{{$value->tomtat}}</p>
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <div class="btn-group">
-                                                <a href="{{url('xem-truyen/'.$value->slug_truyen)}}" class="btn btn-sm btn-outline-secondary">Đọc ngay</a>
-                                                <a class="btn btn-sm btn-outline-secondary"><i class="fas fa-eye"> 3500</i></a>
-                                            </div>
-                                            <small class="text-muted">9 mins ago</small>
-                                        </div>
-                                    </div>                                
-                            </div>
-                        </div>  
-                        @endforeach                      
-                    </div>
-                    <a class="btn btn-success" href="">Xem tất cả</a>
-                </div>
-</div>
-
-<!-------Sách hay xem nhiều-------->
-            <!-- <div class="album py-5 bg-light">
-            <h3>Sách hay xem nhiều</h3>           
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-3">
-                            <div class="card mb-3 box-shadow">
-                                <img class="card-img-top" src="{{asset('public/uploads/truyen/cinderella176.jpg')}}" >
-                                <div class="card-body">
-                                    <h3>This is a wider card with supporting text below</h3>
-                                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                                        <p class="card-text"><p style="display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;">{{$value->tomtat}}</p></p>
                                     <div class="d-flex justify-content-between align-items-center">
                                         <div class="btn-group">
-                                            <a href="" class="btn btn-sm btn-outline-secondary">Đọc ngay</a>
-                                            <a class="btn btn-sm btn-outline-secondary"><i class="fas fa-eye"> 3500</i></a>
+                                            <a href="{{url('xem-truyen/'.$value->slug_truyen)}}" class="btn btn-sm btn-outline-secondary">Đọc ngay</a>
+                                            <a  class="btn btn-sm btn-outline-secondary"><i class="fas fa-eye"></i>19999</a>
                                         </div>
-                                        <small class="text-muted">9 mins ago</small>
+                                        <small class="text-body-secondary">{{$value->updated_at->diffForHumans()}}</small>
+                                    </div>
                                     </div>
                                 </div>
                             </div>
-                        </div> 
-                        
-                        <div class="col-md-3">
-                            <div class="card mb-3 box-shadow">
-                                <img class="card-img-top" src="{{asset('public/uploads/truyen/cinderella176.jpg')}}" >
-                                <div class="card-body">
-                                    <h3>This is a wider card with supporting text below</h3>
-                                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <div class="btn-group">
-                                            <a href="" class="btn btn-sm btn-outline-secondary">Đọc ngay</a>
-                                            <a class="btn btn-sm btn-outline-secondary"><i class="fas fa-eye"> 3500</i></a>
-                                        </div>
-                                        <small class="text-muted">9 mins ago</small>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> 
-
-                        <div class="col-md-3">
-                            <div class="card mb-3 box-shadow">
-                                <img class="card-img-top" src="{{asset('public/uploads/truyen/cinderella176.jpg')}}" >
-                                <div class="card-body">
-                                    <h3>This is a wider card with supporting text below</h3>
-                                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <div class="btn-group">
-                                            <a href="" class="btn btn-sm btn-outline-secondary">Đọc ngay</a>
-                                            <a class="btn btn-sm btn-outline-secondary"><i class="fas fa-eye"> 3500</i></a>
-                                        </div>
-                                        <small class="text-muted">9 mins ago</small>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> 
-
-                        <div class="col-md-3">
-                            <div class="card mb-3 box-shadow">
-                                <img class="card-img-top" src="{{asset('public/uploads/truyen/cinderella176.jpg')}}" >
-                                <div class="card-body">
-                                    <h3>This is a wider card with supporting text below</h3>
-                                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <div class="btn-group">
-                                            <a href="" class="btn btn-sm btn-outline-secondary">Đọc ngay</a>
-                                            <a class="btn btn-sm btn-outline-secondary"><i class="fas fa-eye"> 3500</i></a>
-                                        </div>
-                                        <small class="text-muted">9 mins ago</small>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>                        
-                    </div>
-                    <a class="btn btn-success" href="">Xem tất cả</a>
-                </div>
-            </div> -->
-
-<!-------Blogs-------->
-            <!-- <div class="album py-5 bg-light">
-            <h3>Blogs</h3>           
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-3">
-                            <div class="card mb-3 box-shadow">
-                                <img class="card-img-top" src="{{asset('public/uploads/truyen/cinderella176.jpg')}}" >
-                                <div class="card-body">
-                                    <h3>This is a wider card with supporting text below</h3>
-                                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <div class="btn-group">
-                                            <a href="" class="btn btn-sm btn-outline-secondary">Đọc ngay</a>
-                                            <a class="btn btn-sm btn-outline-secondary"><i class="fas fa-eye"> 3500</i></a>
-                                        </div>
-                                        <small class="text-muted">9 mins ago</small>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> 
-                        
-                        <div class="col-md-3">
-                            <div class="card mb-3 box-shadow">
-                                <img class="card-img-top" src="{{asset('public/uploads/truyen/cinderella176.jpg')}}" >
-                                <div class="card-body">
-                                    <h3>This is a wider card with supporting text below</h3>
-                                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <div class="btn-group">
-                                            <a href="" class="btn btn-sm btn-outline-secondary">Đọc ngay</a>
-                                            <a class="btn btn-sm btn-outline-secondary"><i class="fas fa-eye"> 3500</i></a>
-                                        </div>
-                                        <small class="text-muted">9 mins ago</small>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> 
-
-                        <div class="col-md-3">
-                            <div class="card mb-3 box-shadow">
-                                <img class="card-img-top" src="{{asset('public/uploads/truyen/cinderella176.jpg')}}" >
-                                <div class="card-body">
-                                    <h3>This is a wider card with supporting text below</h3>
-                                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <div class="btn-group">
-                                            <a href="" class="btn btn-sm btn-outline-secondary">Đọc ngay</a>
-                                            <a class="btn btn-sm btn-outline-secondary"><i class="fas fa-eye"> 3500</i></a>
-                                        </div>
-                                        <small class="text-muted">9 mins ago</small>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> 
-
-                        <div class="col-md-3">
-                            <div class="card mb-3 box-shadow">
-                                <img class="card-img-top" src="{{asset('public/uploads/truyen/cinderella176.jpg')}}" >
-                                <div class="card-body">
-                                    <h3>This is a wider card with supporting text below</h3>
-                                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <div class="btn-group">
-                                            <a href="" class="btn btn-sm btn-outline-secondary">Đọc ngay</a>
-                                            <a class="btn btn-sm btn-outline-secondary"><i class="fas fa-eye"> 3500</i></a>
-                                        </div>
-                                        <small class="text-muted">9 mins ago</small>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>                        
+                            @endforeach
+                        </div>
+                        <a class="btn btn-success" href="" >Xem tất cả</a>
                     </div>
                 </div>
-                <a class="btn btn-success" href="">Xem tất cả</a>
-            </div> -->
+                 <!------------------------ Sách nổi bật ----------------------------->
+               
+                <!------------------------ Blogs ----------------------------->
+               
 @endsection
-            
-            

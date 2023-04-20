@@ -8,14 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class Chapter extends Model
 {
     use HasFactory;
-    public $timestamps=false;
-    protected $fillable=[
-        'truyen_id','tomtat','tieude','noidung','kichhoat','slug_chapter'
+    public $timestamps = false;//set thoi gian false
+    protected $fillable =[
+        'truyen_id','tomtat','tieude','noidung', 'kichhoat','slug_chapter'
     ];
-    protected $primaryKey='id';
-    protected $table='chapter';
+    protected $primarykey ='id';
+    protected $table = 'chapter';
 
     public function truyen(){
-        return $this->belongsTo('App\Models\Truyen');
+        return $this->belongsTo('App\Models\Truyen','truyen_id','id');
     }
+  
 }

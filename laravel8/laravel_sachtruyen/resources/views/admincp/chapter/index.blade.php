@@ -2,10 +2,9 @@
 
 @section('content')
 @include('layouts.nav')
-
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-12">
             <div class="card">
                 <div class="card-header">Liệt kê chapter</div>
 
@@ -15,44 +14,44 @@
                             {{ session('status') }}
                         </div>
                     @endif
-                   
-                    <table class="table table-striped">
+                    <table class="table">
                         <thead>
                             <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Tên chapter</th>
-                                <th scope="col">Slug chapter</th>
-                                <th scope="col">Tóm tắt</th>
-                                <th scope="col">Thuộc truyện</th>
-                                <th scope="col">Kích hoạt</th>
-                                <th scope="col">Quản lý</th>
+                            <th scope="col">#</th>
+                            <th scope="col">Tên chapter</th>
+                            <th scope="col">Slug chapter</th>
+                            <th scope="col">Tóm tắt</th>
+                            <th scope="col">Thuộc truyện</th>
+                            <th scope="col">Kích hoạt</th>
+                            <th scope="col">Quản lý</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($chapter as $key => $chap)
+                            @foreach($chapter as $key =>$chap)
                             <tr>
-                                <th scope="row">{{$key}}</th>
-                                <td>{{$chap->tieude}}</td>
-                                <td>{{$chap->slug_chapter}}</td>
-                                <td>{{$chap->tomtat}}</td>
-                                <td>{{$chap->truyen->tentruyen}}</td>
-                                <td>
-                                    @if($chap->kichhoat==0)
-                                        <span class="text text-success">Kích hoạt</span>
-                                    @else 
-                                        <span class="text text-danger">Không kích hoạt</span>
-                                    @endif
-                                </td>
-                                <td>
-                                    <a href="{{route('chapter.edit',[$chap->id])}}" class="btn btn-primary">Edit</a>
-                                    <form action="{{route('chapter.destroy',[$chap->id])}}" method="POST">
-                                        @method('DELETE')
-                                        @csrf
-                                        <button onclick="return confirm('Bạn muốn xóa chapter này không?');" class="btn btn-danger">Delete</button>
-                                    </form>
-                                </td>
+                            <th scope="row">{{$key}}</th>
+                            <td>{{$chap->tieude}}</td>
+                            <td>{{$chap->slug_chapter}}</td>
+                            <td>{{$chap->tomtat}}</td>
+                            <td>{{$chap->truyen->tentruyen}}</td>
+                            <td>
+                                @if($chap->kichhoat==0)
+                                    <span class="text text-success">Kích hoạt</span>
+                                @else
+                                    <span class="text text-danger">Không kích hoạt</span>
+                                @endif
+                            </td>
+                            <td>
+                                <a href="{{route('chapter.edit',[$chap->id])}}" class="btn btn-primary">Sửa</a>
+                                <form action="{{route('chapter.destroy',[$chap->id])}}" method="POST">
+                                    @method('DELETE')
+                                    @csrf
+                                    <button onclick="return confirm('Xác nhận xóa chapter!');" class="btn btn-danger">Xóa</button>
+
+                                </form>
+                            </td>
                             </tr>
-                            @endforeach
+                           @endforeach  
                         </tbody>
                     </table>
                 </div>
@@ -61,4 +60,3 @@
     </div>
 </div>
 @endsection
- 

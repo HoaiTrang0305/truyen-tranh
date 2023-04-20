@@ -1,128 +1,137 @@
-@extends ('../layout')
-
-
+@extends('../layout')
+<!-- @section('slide')
+    @include('pages.slide')
+@endsection   -->
 @section('content')
+<style type="text/css">
+            .card-text{
+                display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;
+            }</style>
 <nav aria-label="breadcrumb">
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="#">Home</a></li>
-    <li class="breadcrumb-item"><a href="#">Library</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Data</li>
-  </ol>
-</nav>
-<div class="row">
-    <div class="col-md-9">
-        <dic class="row">
-            <div class="col-md-3">
-                <img class="card-img-top" src="{{asset('public/uploads/truyen/cinderella176.jpg')}}" >
-            </div>
-            <div class="col-md-9">
-                <style type="text/css">
-                    .infotruyen{
-                        list-style:none;
-                    }
-
-                </style>
-                <ul class="infotruyen">
-                    <li>Tác giả: Charles Perrault</li>
-                    <li>Thể loại: Truyên cổ tích</li>
-                    <li>Số chapter: 5</li>
-                    <li>Số lượt xem: 02</li>
-                    <li><a href="#">Xem mục lục</a></li>
-                    <li><a href="#" class="btn btn-primary">Đọc online</a><li>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{url('/')}}">Trang chủ</a></li>
+            <li class="breadcrumb-item"><a href="{{url('danh-muc/'.$truyen->danhmuctruyen->slug_danhmuc)}}">{{$truyen->danhmuctruyen->tendanhmuc}}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{$truyen->tentruyen}}</li>
+        </ol>
+    </nav>  
+    <div class="row">
+        <div class="col-md-9">
+            <div class="row">
+                <div class="col-md-3">
+                        <img class="card-img-top" src="{{asset('public/uploads/truyen/'.$truyen->hinhanh)}}" />
+                </div>
+                <div class="col-md-9">
+                    <style type="text/css">
+                        .infotruyen{
+                            list-style: none;
+                        }
+                    </style>
                     
+                    <ul class="infotruyen">
+                        <!-------------lấy biến wishlist----------------->
+                        <input type="hidden" value="{{$truyen->tentruyen}}" class="wishlist_title">
+                        <input type="hidden" value="{{\URL::current()}}" class="wishlist_url">
+                        <input type="hidden" value="{{$truyen->id}}" class="wishlist_id">
+                        <!----------------------------------------------->
+
+                    <h4><b>{{$truyen->tentruyen}}</b></h4>
+                        <li>Ngày đăng: {{$truyen->created_at->format('d M Y')}}</li>
+                        <li>Tác giả: {{$truyen->tacgia}}</li>
+                        <li>Danh mục truyện: <a href="{{url('danh-muc/'.$truyen->danhmuctruyen->slug_danhmuc)}}">
+                            {{$truyen->danhmuctruyen->tendanhmuc}}
+                        </a></li>
+                        @php
+                        $mucluc = count($chapter);
+                            
+                        
+                        @endphp
+                        <li>Số chapter : {{$mucluc}}</li>
+                        <li>Số lượng xem : 199</li>
+                       
+                        @if($chapter_dau)
+                        <li><a href="{{url('xem-chapter/'.$chapter_dau->slug_chapter)}}" class="btn btn-primary">Đọc Truyện</a></li>
+                        <li><a href="{{url('xem-chapter/'.$chapter_moinhat->slug_chapter)}}" class="btn btn-primary mt-2">Chapter Mới Nhất</a></li>
+                        <button class="btn btn-danger btn-thich-truyen mt-2"><i class="fa fa-heart" aria-hiden="true"></i> Thích Truyện</button>
+                        @else
+                        <li><a  class="btn btn-danger">Chương chưa cập nhật</a></li>
+                        
+                        @endif
+                        <div class="fb-share-button" data-href="{{\URL::current()}}" data-layout="" data-size=""><a target="_blank" href="{{\URL::current()}}&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Chia sẻ</a></div>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <p>
+                {{$truyen->tomtat}}
+                 </p>
+            </div>
+            <hr>
+            <h4>Mục lục</h4>
+                <ul class="mucluctruyen">
+                @php
+                 $mucluc = count($chapter);
+                    @endphp
+                    @if($mucluc==0)
+                                <p>Không có chapter nào</p>
+                    @else
+                @foreach($chapter as $key => $chap)
+                        <li><a href="{{url('xem-chapter/'.$chap->slug_chapter)}}">{{$chap->tieude}}</a></li>
+                @endforeach
+                @endif
                 </ul>
+
+                <div class="fb-comments" data-href="{{\URL::current()}}" data-width="100%" data-numposts="10"></div>
+            <h4>Sách liên quan</h4>
+            <div class="row">
+                    
+            @foreach($cungdanhmuc as $key =>$value)
+                            <div class="col-md-3">
+                            <div class="card shadow-sm">
+                               
+                                    <img class="card-img-top" src="{{asset('public/uploads/truyen/'.$value->hinhanh)}}" />
+                                    <div class="card-body">
+                                        <h5>{{$value->tentruyen}}</h5>
+                                        <p class="card-text">{{$value->tomtat}}</p>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="btn-group">
+                                            <a href="{{url('xem-truyen/'.$value->slug_truyen)}}" class="btn btn-sm btn-outline-secondary">Đọc ngay</a>
+                                            <a  class="btn btn-sm btn-outline-secondary"><i class="fas fa-eye"></i>19999</a>
+                                        </div>
+                                        <small class="text-body-secondary">{{$value->updated_at->diffForHumans()}}</small>
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
+                @endforeach
             </div>
         </div>
-        <div class="col-md-12">
-            <p>Truyện Cô bé lọ lem kể rằng ở một ngôi nhà nọ,
-                 có một cô gái có ngoại hình xinh đẹp, chăm chỉ,
-                  rất thích ca hát và rất hiếu thảo.
-                   Mẹ cô mất sớm nên bố cô lấy vợ hai.
-                    Người vợ này tính tình độc ác và có hai 
-                    cô con gái vừa xấu tính vừa keo kiệt. 
-                    Và sau đó không lâu thì cha Lọ Lem cũng mất.  
-                    Và người mẹ kế đã bắt Lọ Lem làm việc chăm chỉ,
-                     không ngơi tay. Vào đêm vũ hội, Lọ Lem được
-                      sự giúp đỡ của bà tiên và tham dự vũ hội.
-                       Yêu cầu của nàng tiên là trước 12 giờ đêm 
-                       phải trở về nhà. Chàng hoàng tử yêu nàng say 
-                       đắm nàng Lọ Lem. Cô ấy rời quả bóng và đánh
-                        rơi một chiếc giày thủy tinh. Hoàng tử ra 
-                        lệnh tìm chủ nhân của chiếc giày. Và cuối 
-                        cùng anh đã tìm thấy cô. Kể từ đó, họ sống 
-                        hạnh phúc bên nhau.</p>
+
+        <div class="col-md-3">
+           
+            <h3 >Truyện yêu thích</h3>
+            <div id="yeuthich"></div>
+            <h3>Truyện nổi bật</h3>
+            @foreach($truyen_noibat as $key =>$truyennb)
+            <div class="row mt-2">
+                        <div class="col-md-5"><img class="img img-responsive" width="100%" class="card-img-top" src="{{asset('public/uploads/truyen/'.$truyennb->hinhanh)}}" alt=""></div>
+                            <div class="col-md-7 sidebar">
+                            <a href="{{url('xem-truyen/'.$truyennb->slug_truyen)}}">
+                                <p style="color:#666">{{$truyennb->tentruyen}}</p>
+                            </a>
+                        </div>
+                    </div> 
+            @endforeach
+            <h3>Truyện xem nhiều</h3>
+            @foreach($truyen_xemnhieu as $key =>$truyenxn)
+            <div class="row mt-2">
+                        <div class="col-md-5"><img class="img img-responsive" width="100%" class="card-img-top" src="{{asset('public/uploads/truyen/'.$truyenxn->hinhanh)}}" alt=""></div>
+                            <div class="col-md-7 sidebar">
+                            <a href="{{url('xem-truyen/'.$truyenxn->slug_truyen)}}">
+                                <p style="color:#666">{{$truyenxn->tentruyen}}</p>
+                            </a>
+                        </div>
+                    </div> 
+            @endforeach
         </div>
-        <hr>
-        <h4>Mục lục</h4>
-        <ul class="mucluctruyen">
-            <li><a href="#">Phần thứ nhất-Chương1</a></li>
-            <li><a href="#">Phần thứ nhất-Chương2</a></li>
-            <li><a href="#">Phần thứ nhất-Chương3</a></li>
-            <li><a href="#">Phần thứ nhất-Chương4</a></li>
-            <li><a href="#">Phần thứ nhất-Chương5</a></li>
-        </ul>
-        <h4>Sách cùng danh mục</h4>
-        <div class="row">
-            <div class="col-md-3">
-                <div class="card mb-3 box-shadow">
-                    <a href="">
-                        <img class="card-img-top" src="{{asset('public/uploads/truyen/cinderella176.jpg')}}" >
-                        <div class="card-body">
-                            <h5>This is a wider card with supporting text below</h5>
-                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                           
-                        </div>
-                    </a>
-                </div>
-            </div> 
-
-            <div class="col-md-3">
-                <div class="card mb-3 box-shadow">
-                    <a href="">
-                        <img class="card-img-top" src="{{asset('public/uploads/truyen/cinderella176.jpg')}}" >
-                        <div class="card-body">
-                        <h5>This is a wider card with supporting text below</h5>
-                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                           
-                        </div>
-                    </a>
-                </div>
-            </div> 
-
-            <div class="col-md-3">
-                <div class="card mb-3 box-shadow">
-                    <a href="">
-                        <img class="card-img-top" src="{{asset('public/uploads/truyen/cinderella176.jpg')}}" >
-                        <div class="card-body">
-                            <h5>This is a wider card with supporting text below</h5>
-                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                           
-                        </div>
-                    </a>
-                </div>
-            </div>
-
-             <div class="col-md-3">
-                <div class="card mb-3 box-shadow">
-                    <a href="">
-                        <img class="card-img-top" src="{{asset('public/uploads/truyen/cinderella176.jpg')}}" >
-                        <div class="card-body">
-                            <h5>This is a wider card with supporting text below</h5>
-                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                           
-                        </div>
-                    </a>
-                </div>
-            </div> 
-        </div>
-
     </div>
-
-    <div class="col-md-3">
-        <h3>Sách hay xem nhiều</h3>
-    </div>
-</div>
-
 @endsection
-            
-            

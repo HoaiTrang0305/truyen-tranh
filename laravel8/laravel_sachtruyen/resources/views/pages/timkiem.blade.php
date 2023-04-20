@@ -3,15 +3,14 @@
     @include('pages.slide')
 @endsection   -->
 @section('content')  
-
 <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{url('/')}}">Trang chủ</a></li>
-            <li class="breadcrumb-item active" aria-current="page">{{$tendanhmuc}}</li>
+            <li class="breadcrumb-item active" aria-current="page">{{$tukhoa}}</li>
         </ol>
     </nav>        
                 <!------------------------ Sách mới ----------------------------->
-                <h3>{{$tendanhmuc}}</h3>
+                <h3>Kết quả tìm kiếm với từ khóa: {{$tukhoa}}</h3>
                 <div class="album py-5 bg-body-tertiary">
                         <div class="container">
                             
@@ -37,7 +36,7 @@
                                             <a href="{{url('xem-truyen/'.$value->slug_truyen)}}" class="btn btn-sm btn-outline-secondary">Đọc ngay</a>
                                             <a  class="btn btn-sm btn-outline-secondary"><i class="fas fa-eye"></i>19999</a>
                                         </div>
-                                        <small class="text-body-secondary">{{$value->updated_at->diffForHumans()}}</small>
+                                        <small class="text-body-secondary">9 mins</small>
                                     </div>
                                     </div>
                                 </div>

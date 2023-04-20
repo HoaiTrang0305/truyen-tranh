@@ -5,18 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class DanhmucTruyen extends Model
+class Theloai extends Model
 {
     use HasFactory;
-    
+    use HasFactory;
     public $timestamps = false;//set thoi gian false
     protected $fillable =[
-        'tendanhmuc','mota','kichhoat','slug_danhmuc'
+        'tentheloai','slug_theloai','mota','kichhoat'
     ];
     protected $primarykey ='id';
-    protected $table = 'danhmuc';
-
-    public function truyen(){
-        return $this->hasMany('App\Models\Truyen');
-    }
+    protected $table = 'truyen';
 }

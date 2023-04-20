@@ -26,8 +26,11 @@ class IndexController extends Controller
         }
     }
     public function home(){
+
+        // $phantrang=Truyen::paginate(2);
+
         $danhmuc = DanhmucTruyen::orderBy('id','DESC')->get();
-        $truyen = Truyen::orderBy('id','DESC')->where('kichhoat',0)->get();
+        $truyen = Truyen::orderBy('id','DESC')->where('kichhoat',0)->paginate(8);
         return view('pages.home')->with(compact('danhmuc','truyen'));
     }
     public function danhmuc($slug){
@@ -37,7 +40,7 @@ class IndexController extends Controller
         $danhmuc_id = DanhmucTruyen::where('slug_danhmuc',$slug)->first();
          
         $tendanhmuc = $danhmuc_id->tendanhmuc;
-        $truyen = Truyen::orderBy('id','DESC')->where('kichhoat',0)->where('danhmuc_id',$danhmuc_id->id)->get();
+        $truyen = Truyen::orderBy('id','DESC')->where('kichhoat',0)->where('danhmuc_id',$danhmuc_id->id)->paginate(8);
         return view('pages.danhmuc')->with(compact('danhmuc','truyen','tendanhmuc'));
     }
     public function xemtruyen($slug){

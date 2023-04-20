@@ -17,7 +17,7 @@
                             
                         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-3">
                             @php
-                                echo $count = count($truyen);
+                               $count = count($truyen);
                             @endphp
                             @if($count==0)
                                 <p>Không có truyện nào</p>
@@ -34,8 +34,8 @@
                                         <p class="card-text">{{$value->tomtat}}</p>
                                     <div class="d-flex justify-content-between align-items-center">
                                         <div class="btn-group">
-                                            <a href="{{url('xem-truyen/'.$value->slug_truyen)}}" class="btn btn-sm btn-outline-secondary">Đọc ngay</a>
-                                            <a  class="btn btn-sm btn-outline-secondary"><i class="fas fa-eye"></i>19999</a>
+                                            <a href="{{url('xem-truyen/'.$value->slug_truyen)}}" class="btn btn-sm btn-success">Đọc ngay</a>
+                                           
                                         </div>
                                         <small class="text-body-secondary">{{$value->updated_at->diffForHumans()}}</small>
                                     </div>
@@ -45,12 +45,12 @@
                             @endforeach
                         @endif
                         </div>
-                        <a class="btn btn-success" href="" >Xem tất cả</a>
+                       
                     </div>
                 </div>
-                 <!------------------------ Danh mục truyen ----------------------------->
-                
-               
-                <!------------------------  ----------------------------->
+                <hr>
+             <nav aria-lable="Page navigation nav-success">
+                {!!$truyen->links()!!}
+             </nav>
                
 @endsection

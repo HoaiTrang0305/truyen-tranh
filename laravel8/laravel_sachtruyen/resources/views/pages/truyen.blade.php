@@ -46,7 +46,7 @@
                         
                         @endphp
                         <li>Số chapter : {{$mucluc}}</li>
-                        <li>Số lượng xem : 199</li>
+                       
                        
                         @if($chapter_dau)
                         <li><a href="{{url('xem-chapter/'.$chapter_dau->slug_chapter)}}" class="btn btn-primary">Đọc Truyện</a></li>
@@ -75,11 +75,12 @@
                                 <p>Không có chapter nào</p>
                     @else
                 @foreach($chapter as $key => $chap)
-                        <li><a href="{{url('xem-chapter/'.$chap->slug_chapter)}}">{{$chap->tieude}}</a></li>
+                        <li style="  list-style: none;"><a href="{{url('xem-chapter/'.$chap->slug_chapter)}}">{{$chap->tieude}}</a></li>
                 @endforeach
                 @endif
                 </ul>
-
+                
+                <h4>Bình luận</h4>           
                 <div class="fb-comments" data-href="{{\URL::current()}}" data-width="100%" data-numposts="10"></div>
             <h4>Sách liên quan</h4>
             <div class="row">
@@ -88,14 +89,14 @@
                             <div class="col-md-3">
                             <div class="card shadow-sm">
                                
-                                    <img class="card-img-top" src="{{asset('public/uploads/truyen/'.$value->hinhanh)}}" />
+                                    <img class="card-img-top" style="height:400px;object-fit: cover;" src="{{asset('public/uploads/truyen/'.$value->hinhanh)}}" />
                                     <div class="card-body">
-                                        <h5>{{$value->tentruyen}}</h5>
+                                    <div class="ten-truyen">{{$value->tentruyen}}</div>
                                         <p class="card-text">{{$value->tomtat}}</p>
                                     <div class="d-flex justify-content-between align-items-center">
                                         <div class="btn-group">
-                                            <a href="{{url('xem-truyen/'.$value->slug_truyen)}}" class="btn btn-sm btn-outline-secondary">Đọc ngay</a>
-                                            <a  class="btn btn-sm btn-outline-secondary"><i class="fas fa-eye"></i>19999</a>
+                                            <a href="{{url('xem-truyen/'.$value->slug_truyen)}}" class="btn btn-sm btn-success">Đọc ngay</a>
+                                          
                                         </div>
                                         <small class="text-body-secondary">{{$value->updated_at->diffForHumans()}}</small>
                                     </div>
@@ -108,9 +109,12 @@
 
         <div class="col-md-3">
            
-            <h3 >Truyện yêu thích</h3>
+            <h4 >Truyện yêu thích</h4>
+            
             <div id="yeuthich"></div>
-            <h3>Truyện nổi bật</h3>
+            <hr>
+            <h4>Truyện nổi bật</h4>
+            
             @foreach($truyen_noibat as $key =>$truyennb)
             <div class="row mt-2">
                         <div class="col-md-5"><img class="img img-responsive" width="100%" class="card-img-top" src="{{asset('public/uploads/truyen/'.$truyennb->hinhanh)}}" alt=""></div>
@@ -121,7 +125,9 @@
                         </div>
                     </div> 
             @endforeach
-            <h3>Truyện xem nhiều</h3>
+            <hr>
+            <h4>Truyện xem nhiều</h4>
+           
             @foreach($truyen_xemnhieu as $key =>$truyenxn)
             <div class="row mt-2">
                         <div class="col-md-5"><img class="img img-responsive" width="100%" class="card-img-top" src="{{asset('public/uploads/truyen/'.$truyenxn->hinhanh)}}" alt=""></div>

@@ -16,7 +16,7 @@
                             
                         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-3">
                             @php
-                                echo $count = count($truyen);
+                                 $count = count($truyen);
                             @endphp
                             @if($count==0)
                                 <p>Không có truyện nào</p>
@@ -27,14 +27,14 @@
                             <div class="col">
                             <div class="card shadow-sm">
                                
-                                    <img class="card-img-top" src="{{asset('public/uploads/truyen/'.$value->hinhanh)}}" />
+                                    <img class="card-img-top" style="height:400px;object-fit: cover;" src="{{asset('public/uploads/truyen/'.$value->hinhanh)}}" />
                                     <div class="card-body">
-                                        <h5>{{$value->tentruyen}}</h5>
+                                        <div class="ten-truyen">{{$value->tentruyen}}</div>
                                         <p class="card-text">{{$value->tomtat}}</p>
                                     <div class="d-flex justify-content-between align-items-center">
                                         <div class="btn-group">
-                                            <a href="{{url('xem-truyen/'.$value->slug_truyen)}}" class="btn btn-sm btn-outline-secondary">Đọc ngay</a>
-                                            <a  class="btn btn-sm btn-outline-secondary"><i class="fas fa-eye"></i>19999</a>
+                                            <a href="{{url('xem-truyen/'.$value->slug_truyen)}}" class="btn btn-sm btn-success">Đọc ngay</a>
+                                           
                                         </div>
                                         <small class="text-body-secondary">9 mins</small>
                                     </div>
@@ -44,7 +44,7 @@
                             @endforeach
                         @endif
                         </div>
-                        <a class="btn btn-success" href="" >Xem tất cả</a>
+                      
                     </div>
                 </div>
                  <!------------------------ Danh mục truyen ----------------------------->

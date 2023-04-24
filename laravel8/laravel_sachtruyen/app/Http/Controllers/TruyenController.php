@@ -70,7 +70,7 @@ class TruyenController extends Controller
          $truyen->kichhoat = $data['kichhoat'];
          $truyen->danhmuc_id = $data['danhmuc'];
          $truyen->created_at= Carbon::now('Asia/Ho_Chi_Minh');
-         $truyen->truyen_noibat = $data['truyennoibat'];
+         $truyen->truyen_noibat = $data['truyen_noibat'];
          $get_image=$request->hinhanh;
          
          $path ='public/uploads/truyen/';

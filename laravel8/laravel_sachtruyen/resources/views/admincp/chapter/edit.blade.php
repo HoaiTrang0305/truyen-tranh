@@ -42,7 +42,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">Nội dung</label>
-                           <textarea name="noidung" id="noidung_chapter" class="form-control" rows="20" style="resize:none;">{{$chapter->noidung}}</textarea>
+                           <textarea name="noidung"class="form-control" rows="20" style="resize:none;">{{$chapter->noidung}}</textarea>
                         </div>
                         <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">Thuộc truyện</label>

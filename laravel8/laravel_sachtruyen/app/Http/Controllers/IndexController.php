@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\DanhmucTruyen;
 use App\Models\Truyen;
+use App\Models\Blog;
 use App\Models\Chapter;
 class IndexController extends Controller
 {
@@ -19,7 +20,7 @@ class IndexController extends Controller
 
             foreach($truyen as $key => $tr){
                 $output.='
-                <li class="li_search_ajax"><a href="#">'.$tr->tentruyen.'</a></li>';
+                <li class="li_search_ajax"><a href="">'.$tr->tentruyen.'</a></li>';
             }
             $output.='</ul>';
             echo $output;
@@ -31,7 +32,8 @@ class IndexController extends Controller
 
         $danhmuc = DanhmucTruyen::orderBy('id','DESC')->get();
         $truyen = Truyen::orderBy('id','DESC')->where('kichhoat',0)->paginate(8);
-        return view('pages.home')->with(compact('danhmuc','truyen'));
+        $truyen_slide = Truyen::orderBy('id','DESC')->where('kichhoat',0)->get();
+        return view('pages.home')->with(compact('danhmuc','truyen','truyen_slide'));
     }
     public function danhmuc($slug){
         $danhmuc = DanhmucTruyen::orderBy('id','DESC')->get();
@@ -94,5 +96,16 @@ class IndexController extends Controller
     public function about()
     {  $danhmuc = DanhmucTruyen::orderBy('id','DESC')->get();
         return view('pages.about')->with(compact('danhmuc'));
+    }
+    public function baiviet(){
+        $danhmuc = DanhmucTruyen::orderBy('id','DESC')->get();
+        $blog = Blog::orderBy('id','DESC')->where('kichhoat',0)->paginate(8);
+        return view('pages.baiviet')->with(compact('blog','danhmuc'));
+    }
+    public function xembaiviet($slug){
+        $danhmuc = DanhmucTruyen::orderBy('id','DESC')->get();
+        $blog = Blog::where('slug_baiviet',$slug)->first();
+        $blogs = Blog::orderBy('id','DESC')->whereNotIn('id',[$blog->id])->where('kichhoat',0)->get();
+        return view('pages.xembaiviet')->with(compact('blog','danhmuc','blogs'));
     }
 }

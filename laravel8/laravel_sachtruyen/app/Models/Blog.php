@@ -5,14 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Theloai extends Model
+class Blog extends Model
 {
-    use HasFactory;
     use HasFactory;
     public $timestamps = false;//set thoi gian false
     protected $fillable =[
-        'tentheloai','slug_theloai','mota','kichhoat'
+        'tenbaiviet','tacgia','hinhanh','noidung','kichhoat','slug_baiviet','created_at','updated_at'
     ];
     protected $primarykey ='id';
-    protected $table = 'truyen';
+    protected $table = 'blog';
+
 }

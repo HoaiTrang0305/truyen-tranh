@@ -42,6 +42,9 @@
    align-content: center;
   border-top: 1px solid #aaa;
 }
+.ten-truyen{
+  height: 30px;
+}
 .card-read-more a {
   padding:10px;
   font-weight:600;
@@ -51,7 +54,7 @@
 }
 </style>
                 <div style="margin-top:50px;"  class="owl-carousel owl-theme">
-                @foreach($truyen as $key =>$value)
+                @foreach($truyen_slide as $key =>$value)
                 <div class="card">
                             <img style="height:400px;object-fit: cover;"  src="{{asset('public/uploads/truyen/'.$value->hinhanh)}}" />
                           </a>
@@ -85,7 +88,7 @@
                                             <a href="{{url('xem-truyen/'.$value->slug_truyen)}}" class="btn btn-sm btn-success">Đọc ngay</a>
                                            
                                         </div>
-                                        <small class="text-body-secondary">{{$value->updated_at->diffForHumans()}}</small>
+                                        <small class="text-body-secondary">{{$value->created_at->diffForHumans()}}</small>
                                     </div>
                                     </div>
                                 </div>
@@ -96,10 +99,10 @@
                     </div>
                 </div>
              <hr>
-             </div>
-             <nav aria-lable="Page navigation">
+             <nav aria-lable="Page navigation justify-content-end">
                 {!!$truyen->links()!!}
              </nav>                 
+             </div>
             </div>
              
                

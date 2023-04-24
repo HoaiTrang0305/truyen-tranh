@@ -144,6 +144,7 @@ class ChapterController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Chapter::find($id)->delete();
+        return redirect()->back()->with('status','Xóa chapter thành công');
     }
 }

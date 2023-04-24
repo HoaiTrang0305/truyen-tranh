@@ -6,7 +6,7 @@ use App\Http\Controllers\DanhmucController;
 use App\Http\Controllers\TruyenController;
 use App\Http\Controllers\ChapterController;
 use App\Http\Controllers\IndexController;
-
+use App\Http\Controllers\BlogController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,10 +26,13 @@ Route::get('/xem-chapter/{slug}',[  IndexController::class,'xemchapter']);
 Route::get('/tim-kiem',[  IndexController::class,'timkiem']);
 Route::post('/timkiem-ajax',[  IndexController::class,'timkiem_ajax']);
 Route::get('/about',[  IndexController::class,'about']);
+Route::get('/xem-baiviet/{slug}',[  IndexController::class,'xembaiviet']);
+Route::get('/baiviet',[ IndexController::class,'baiviet']);
 Auth::routes();
 
 Route::get('/home',[HomeController::class , 'index'])->name('home');
 Route::resource('/danhmuc',DanhmucController::class );
 Route::resource('/truyen',TruyenController::class);
 Route::resource('/chapter',ChapterController::class);
+Route::resource('/blog',BlogController::class);
 

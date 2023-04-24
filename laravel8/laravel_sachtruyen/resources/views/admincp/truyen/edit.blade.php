@@ -60,7 +60,7 @@
                             <img src="{{asset('public/uploads/truyen/'.$truyen->hinhanh)}}" height="200" width="150" >
                         </div>
                         <div class="mb-3">
-                        <label for="exampleInputEmail1" class="form-label">Kích hoạt danh mục</label>
+                        <label for="exampleInputEmail1" class="form-label">Kích hoạt truyện</label>
                         <select name="kichhoat" class="form-select" aria-label="Default select example">
                             @if($truyen->kichhoat==0)
                              <option selected value="0">Kích hoạt</option>

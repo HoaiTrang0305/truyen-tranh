@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>Truyện Hay</title>
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
         <link href="{{ asset('css/owl.carousel.min.css') }}" rel="stylesheet">
         <link href="{{ asset('css/owl.theme.default.min.css') }}" rel="stylesheet">
@@ -54,6 +54,11 @@
             padding-left: 5%;
              padding-right: 5%;
             }
+            
+        .ten-truyen{
+        height: 45px;
+        }
+
             .container{
                padding-top: 50px;
             }
@@ -75,10 +80,13 @@
                             <a class="nav-link active" aria-current="page" href="{{url('/')}}">Trang chủ</a>
                             </li>
                             <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="{{url('/baiviet')}}">Bài viết</a>
+                            </li>
+                            <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="{{url('/about')}}">Giới thiệu</a>
                             </li>
                             <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-current="page" aria-expanded="false">Danh mục truyện</a>
+                            <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-current="page" aria-expanded="false">Thể loại truyện</a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 @foreach($danhmuc as $key => $danh)
                                 <li><a class="dropdown-item" href="{{url('danh-muc/'.$danh->slug_danhmuc)}}">{{$danh->tendanhmuc}}</a></li>
@@ -90,14 +98,14 @@
                                 <option value="xam">Giao diện sáng</option>
                                 <option value="den">Giao diện tối</option>
                             </select>
-                         
+                          
 
                             
                         </ul>
                         <form autocomplete="off" class="d-flex" action="{{url('tim-kiem')}}" method="GET">
                            @csrf
                             <input class="form-control me-2" type="search" id="keywords" name="tukhoa" placeholder="Tìm kiếm tác giả, truyện..." aria-label="Search">
-                            <div id="search_ajax"></div>
+                            <!-- <div id="search_ajax"></div> -->
                             <button class="btn btn-outline-success" type="submit">Search</button>
                             
                            
@@ -124,8 +132,8 @@
                     <p class="float-end mb-1">
                     
                     </p>
-                    <p class="mb-1">Album example is © Bootstrap, but please download and customize it for yourself!</p>
-                    <p class="mb-0">New to Bootstrap? <a href="/">Visit the homepage</a> or read our <a href="/docs/5.3/getting-started/introduction/">getting started guide</a>.</p>
+                    <p class="mb-1">TruyenHay là website chuyên cung cấp các đầu truyện mới thuộc nhiều thể loại truyện.</p>
+                    <p class="mb-0">Liên hệ với chúng tôi qua facebook: <a href="/">TruyenHayfb</a>.</p>
                 </div>
                 </footer>
             </div>
@@ -142,6 +150,7 @@
                     data.reverse();
                     for(i=0;i<data.length;i++){
                         var title = data[i].title;
+                        var danhmuc = data[i].danhmuc;
                         var img = data[i].img;
                         var id = data[i].id;
                         var url = data[i].url;
@@ -151,6 +160,7 @@
                             <div class="col-md-7 sidebar">
                             <a href="`+url+`">
                                 <p style="color:#666">`+title+`</p>
+                                <p style="color:#666">`+danhmuc+`</p>
                             </a>
                         </div>
                     </div> 
@@ -162,6 +172,7 @@
             $('.fa.fa-heart').css('color','#fac');
             const id=$('.wishlist_id').val();
             const title = $('.wishlist_title').val();
+            const danhmuc = $('.wishlist_danhmuc').val();
             const img =$('.card-img-top').attr('src');
             const url =$('.wishlist_url').val();
             // alert(id);
@@ -171,6 +182,7 @@
             const item = {
                 'id':id,
                 'title':title,
+                'danhmuc':danhmuc,
                 'img':img,
                 'url':url
             }
@@ -196,6 +208,7 @@
                             <div class="col-md-7 sidebar">
                             <a href="`+url+`">
                                 <p style="color:#666">`+title+`</p>
+                                <p style="color:#666">`+danhmuc+`</p>
                             </a>
                         </div>
                     </div> 

@@ -3,6 +3,13 @@
     @include('pages.slide')
 @endsection   -->
 @section('content')  
+<style type="text/css">
+
+.ten-truyen{
+  height: 45px;
+}
+
+</style>
 <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{url('/')}}">Trang chủ</a></li>

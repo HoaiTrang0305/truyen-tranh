@@ -30,11 +30,13 @@
                     <ul class="infotruyen">
                         <!-------------lấy biến wishlist----------------->
                         <input type="hidden" value="{{$truyen->tentruyen}}" class="wishlist_title">
+                        <input type="hidden" value="{{$truyen->danhmuctruyen->tendanhmuc}}" class="wishlist_danhmuc">
                         <input type="hidden" value="{{\URL::current()}}" class="wishlist_url">
                         <input type="hidden" value="{{$truyen->id}}" class="wishlist_id">
                         <!----------------------------------------------->
-
-                    <h4><b>{{$truyen->tentruyen}}</b></h4>
+                    
+              
+                    <h4>{{$truyen->tentruyen}}</h4>
                         <li>Ngày đăng: {{$truyen->created_at->format('d M Y')}}</li>
                         <li>Tác giả: {{$truyen->tacgia}}</li>
                         <li>Danh mục truyện: <a href="{{url('danh-muc/'.$truyen->danhmuctruyen->slug_danhmuc)}}">
@@ -49,24 +51,26 @@
                        
                        
                         @if($chapter_dau)
-                        <li><a href="{{url('xem-chapter/'.$chapter_dau->slug_chapter)}}" class="btn btn-primary">Đọc Truyện</a></li>
-                        <li><a href="{{url('xem-chapter/'.$chapter_moinhat->slug_chapter)}}" class="btn btn-primary mt-2">Chapter Mới Nhất</a></li>
-                        <button class="btn btn-danger btn-thich-truyen mt-2"><i class="fa fa-heart" aria-hiden="true"></i> Thích Truyện</button>
+                        <a href="{{url('xem-chapter/'.$chapter_dau->slug_chapter)}}" class="btn btn-outline-success mt-2">Đọc Truyện</a>
+                        <a href="{{url('xem-chapter/'.$chapter_moinhat->slug_chapter)}}" class="btn btn-outline-success mt-2">Chapter Mới Nhất</a><br>
+                        <button class="btn btn-outline-danger btn-thich-truyen mt-2"><i class="fa fa-heart" aria-hiden="true"></i> Thích Truyện</button>
                         @else
-                        <li><a  class="btn btn-danger">Chương chưa cập nhật</a></li>
+                       <a  class="btn btn-outline-danger mt-2">Chương chưa cập nhật</a></li>
                         
                         @endif
-                        <div class="fb-share-button" data-href="{{\URL::current()}}" data-layout="" data-size=""><a target="_blank" href="{{\URL::current()}}&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Chia sẻ</a></div>
+                        
+                        <a class="btn btn-outline-primary fb-share-button mt-2" data-href="{{\URL::current()}}" data-layout="" data-size="" target="_blank" href="{{\URL::current()}}&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Chia sẻ</a>
                     </ul>
                 </div>
             </div>
-            <div class="col-md-12">
+            <div class="col-md-12 mt-2">
                 <p>
                 {{$truyen->tomtat}}
                  </p>
             </div>
+            <div style="padding-bottom: 20px;"></div>
+            <h5>DANH SÁCH CHƯƠNG</h5>
             <hr>
-            <h4>Mục lục</h4>
                 <ul class="mucluctruyen">
                 @php
                  $mucluc = count($chapter);
@@ -79,17 +83,20 @@
                 @endforeach
                 @endif
                 </ul>
-                
-                <h4>Bình luận</h4>           
+                <div style="padding-bottom: 20px;"></div>
+                <h5>BÌNH LUẬN TRUYỆN</h5> 
+                <hr>          
                 <div class="fb-comments" data-href="{{\URL::current()}}" data-width="100%" data-numposts="10"></div>
-            <h4>Sách liên quan</h4>
+                <div style="padding-bottom: 20px;"></div>
+                <h5>Sách liên quan</h5>
+                <hr>
             <div class="row">
                     
             @foreach($cungdanhmuc as $key =>$value)
                             <div class="col-md-3">
                             <div class="card shadow-sm">
                                
-                                    <img class="card-img-top" style="height:400px;object-fit: cover;" src="{{asset('public/uploads/truyen/'.$value->hinhanh)}}" />
+                                    <img class="card-img-top" style="height:350px;object-fit: cover;" src="{{asset('public/uploads/truyen/'.$value->hinhanh)}}" />
                                     <div class="card-body">
                                     <div class="ten-truyen">{{$value->tentruyen}}</div>
                                         <p class="card-text">{{$value->tomtat}}</p>
@@ -98,7 +105,7 @@
                                             <a href="{{url('xem-truyen/'.$value->slug_truyen)}}" class="btn btn-sm btn-success">Đọc ngay</a>
                                           
                                         </div>
-                                        <small class="text-body-secondary">{{$value->updated_at->diffForHumans()}}</small>
+                                        <small class="text-body-secondary">{{$value->created_at->diffForHumans()}}</small>
                                     </div>
                                     </div>
                                 </div>
@@ -121,6 +128,8 @@
                             <div class="col-md-7 sidebar">
                             <a href="{{url('xem-truyen/'.$truyennb->slug_truyen)}}">
                                 <p style="color:#666">{{$truyennb->tentruyen}}</p>
+                                <p style="color:#666">{{$truyennb->danhmuctruyen->tendanhmuc}}</p>
+                            </a>
                             </a>
                         </div>
                     </div> 
@@ -134,6 +143,8 @@
                             <div class="col-md-7 sidebar">
                             <a href="{{url('xem-truyen/'.$truyenxn->slug_truyen)}}">
                                 <p style="color:#666">{{$truyenxn->tentruyen}}</p>
+                                <p style="color:#666">{{$truyenxn->danhmuctruyen->tendanhmuc}}</p>
+                            </a>
                             </a>
                         </div>
                     </div> 

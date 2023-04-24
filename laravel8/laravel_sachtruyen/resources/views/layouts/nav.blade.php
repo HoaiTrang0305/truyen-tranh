@@ -41,6 +41,15 @@
                                     <li><a class="dropdown-item" href="{{route('chapter.index')}}">Liệt kê chapter</a></li>
                                   </ul>
                                 </li>
+                                <li class="nav-item dropdown">
+                                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                 Blog
+                                  </a>
+                                  <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <li><a class="dropdown-item" href="{{route('blog.create')}}">Thêm bài viết</a></li>
+                                    <li><a class="dropdown-item" href="{{route('blog.index')}}">Liệt kê bài viết</a></li>
+                                  </ul>
+                                </li>
 
                               </ul>
                               <form class="d-flex">

@@ -50,7 +50,7 @@
                     <p>Chọn Chương</p>
                     </div>
                     <a class="btn btn-outline-success {{$chapter->id==$min_id->id ? 'isDisabled':''}}" href="{{url('xem-chapter/'.$previous_chapter)}}">Chương trước</a>
-                    <select name="" class="custom-select select-chapter">
+                    <select name="" class="custom-select select-chapter bg-light">
                         @foreach($all_chapter as $key =>$chap)
                         <option value="{{url('xem-chapter/'.$chap->slug_chapter)}}">{{$chap->tieude}}</option>
                         @endforeach
@@ -68,7 +68,7 @@
             <div class="form-group">
                     <div>
                     <a class="btn btn-outline-success {{$chapter->id==$min_id->id ? 'isDisabled':''}}" href="{{url('xem-chapter/'.$previous_chapter)}}">Chương trước</a>
-                    <select name="" class="custom-select select-chapter">
+                    <select name="" class="custom-select select-chapter bg-light">
                         @foreach($all_chapter as $key =>$chap)
                         <option value="{{url('xem-chapter/'.$chap->slug_chapter)}}">{{$chap->tieude}}</option>
                         @endforeach
